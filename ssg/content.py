@@ -4,39 +4,50 @@ from collections.abc import Mapping
 
 
 class Content(Mapping):
-    __delimiter = "^(?:-|+){3}\s*$"
-    __regex = re.compile(__delimiter.re.MULTILINE)
-    def load(self, cls, string):
-        _ = __regex.split(string, 2)
-        fm = __regex.split(string, 2)
-        content = __regex.split(string, 2)
-    
-    def @property body():
+    __delimiter = r"^(?:-|+){3}\s*$"
+    __regex = re.compile(__delimiter, re.MULTILINE)
+    @classmethod
+    def load(cls, string):
+        _, fm, content = cls.__regex.split(string, 2)
+        metadata = load(fm, Loader=FullLoader)
+        return cls(metadata, content)
+
+    def __init__(self, metadata, content):
+        self.data = metadata
+        self.data["content"] = content
+
+    @property
+
+    def body(self):
         return self.data["content"]
     
-    def @property type():
-        if self.data is type:
-            return self.data["type"]
-        else:
-            return None
+    @property
+    def type(self):
+        return self.data["type"] if "type" in self.data else None
+    
+    @type.setter
+    def type(self, type):
+        self.data["type"] = type
+    
+
 
     def __getitem__(self, key):
-        return self.data[]
+        return self.data[key]
     
-    def __iter__();
-        self.data
+    def __iter__(self);
+        self.data.__iter__()
 
     def __len__():
-        self.data
+        return len(self.data)
     
-    def __repr__():
+    def __repr__(self):
         data = {}
-    
-    for key in value:
-        if key != content:
-            values = data[key]
-    
-    
+        for key, value in self.data.items():
+            if key != "content":
+                data[key] = value
+        return str(data)
+
+
 
 
 
