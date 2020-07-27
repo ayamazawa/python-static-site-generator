@@ -15,6 +15,8 @@ class Site:
         for path in self.source.rglob("*"):
             if path.is_dir():
                 self.create_dir(path)
+            elif path.is_file():
+                run_parser(path)
 
     parsers = None
 
@@ -25,3 +27,8 @@ class Site:
     
     def run_parser(path):
         parser = load_parser(path.suffix)
+        if parser is not None:
+            parse(path,source,dest)
+        else:
+            NotImplemented
+    
